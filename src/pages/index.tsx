@@ -1,31 +1,29 @@
+"use client"
 import Link from 'next/link'
 import Head from 'next/head'
+import { Button } from '@mui/material'
+import { useRouter } from 'next/router'
 
 export default function Home() {
+  const router = useRouter()
   return (
-    <div className="min-h-screen p-8">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <Head>
-        <title>Home Page</title>
-        <meta name="description" content="Welcome to our Next.js application" />
+        <title>Hello World</title>
+        <meta name="description" content="A simple Hello World page" />
       </Head>
 
-      <main className="max-w-4xl mx-auto ">
-        <h1 className="text-4xl font-bold mb-6">Welcome to Our Website</h1>
-        
-        <div className="bg-gray-500 p-6 rounded-lg shadow-md">
-          <p className="text-lg mb-4">
-            This is the home page of our Next.js application. We're using the Pages Router
-            for navigation and routing.
-          </p>
-          
-          <Link 
-            href="/about"
-            className="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
-          >
-            Learn More About Us
-          </Link>
-        </div>
-      </main>
+      <div className="text-center">
+        <h1 className="text-6xl font-bold text-gray-900 mb-4">
+          Hello World
+        </h1>
+        <p className="text-xl text-gray-600 mb-8">
+          Welcome to my simple Next.js application
+        </p>
+        <Button variant="outlined" onClick={() => {
+          router.push('/about')
+        }}>About</Button>
+      </div>
     </div>
   )
 }
