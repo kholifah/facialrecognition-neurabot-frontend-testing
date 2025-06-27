@@ -1,18 +1,14 @@
-"use client"
+'use client'
+
 import Link from 'next/link'
-import Head from 'next/head'
 import { Button } from '@mui/material'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
   const router = useRouter()
+  
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <Head>
-        <title>Hello World</title>
-        <meta name="description" content="A simple Hello World page" />
-      </Head>
-
       <div className="text-center">
         <h1 className="text-6xl font-bold text-gray-900 mb-4">
           Hello World
@@ -26,4 +22,4 @@ export default function Home() {
       </div>
     </div>
   )
-}
+} 

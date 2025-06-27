@@ -1,17 +1,13 @@
+'use client'
 
-import Head from 'next/head'
 import { Button } from '@mui/material'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 export default function About() {
   const router = useRouter()
+  
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <Head>
-        <title>About</title>
-        <meta name="description" content="About page" />
-      </Head>
-
       <div className="text-center max-w-2xl mx-auto px-4">
         <h1 className="text-4xl font-bold text-gray-900 mb-6">
           About
@@ -22,8 +18,7 @@ export default function About() {
         </p>
         <Button variant="outlined" onClick={() => {
           router.push('/')
-        }}>Outlined</Button>
-
+        }}>Back to Home</Button>
       </div>
     </div>
   )
