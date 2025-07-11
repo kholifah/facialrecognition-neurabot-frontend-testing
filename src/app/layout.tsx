@@ -1,10 +1,13 @@
-import type { Metadata } from 'next'
-import '@/styles/globals.css'
-import Providers from './providers'
 
-export const metadata: Metadata = {
-  title: 'Next.js App',
-  description: 'A simple Next.js application',
+import '@/styles/globals.css'
+import { Inter } from 'next/font/google'
+import ThemeProvider from '../components/ThemeProvider'
+
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata = {
+  title: 'Attendance System',
+  description: 'Facial Recognition Platform',
 }
 
 export default function RootLayout({
@@ -14,11 +17,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased">
-        <Providers>
+      <body className={inter.className}>
+        <ThemeProvider>
           {children}
-        </Providers>
+        </ThemeProvider>
       </body>
     </html>
   )
-} 
+}

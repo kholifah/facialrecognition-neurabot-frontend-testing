@@ -2,9 +2,8 @@
 'use client'
 
 import { useState } from 'react'
-import { TextField, Button, Paper, Box, Typography, InputAdornment, IconButton } from '@mui/material'
+import { TextField, Button, Paper, Box, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import { Eye, EyeOff } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { 
   Building2,
@@ -25,7 +24,7 @@ const LoginContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: '#e0e7ff',
+  backgroundColor: '#f3f4f6',
   padding: '1rem',
 })
 
@@ -42,30 +41,28 @@ const IconWrapper = styled('div')(({ theme }) => ({
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
   const router = useRouter()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (email && password) {
+    if (email) {
       router.push('/dashboard')
     }
   }
 
   return (
     <LoginContainer>
-      <StyledPaper elevation={3} variant='outlined'>
-        <IconWrapper className='bg-blue-600'>
+      <StyledPaper elevation={3}>
+        <IconWrapper>
           <Building2 color="white" size={32} />
         </IconWrapper>
         
         <Typography variant="h4" component="h1" fontWeight="bold" textAlign="center">
-          Attendance System
+          Forgot Password
         </Typography>
         
         <Typography variant="body2" color="text.secondary" textAlign="center" sx={{ mb: 2 }}>
-          Facial Recognition Platform
+          Enter your registered email of your account
         </Typography>
 
         <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
@@ -80,30 +77,6 @@ export default function LoginPage() {
             required
           />
           
-          <TextField
-            fullWidth
-            label="Password"
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            margin="normal"
-            variant="outlined"
-            required
-            placeholder="Enter your password"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={() => setShowPassword(!showPassword)}
-                    edge="end"
-                  >
-                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-          
           <Button
             type="submit"
             fullWidth
@@ -116,7 +89,7 @@ export default function LoginPage() {
               fontWeight: 'medium'
             }}
           >
-            Sign In
+            Send Reset Instructions
           </Button>
           
           <Box textAlign="center">
@@ -124,9 +97,9 @@ export default function LoginPage() {
               variant="text" 
               color="primary"
               sx={{ textTransform: 'none' }}
-              href='/forgot-password'
+              href='/'
             >
-              Forgot Password?
+              Login
             </Button>
           </Box>
         </Box>
