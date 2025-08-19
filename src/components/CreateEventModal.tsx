@@ -1,9 +1,9 @@
-
 'use client';
 
 import React, { useState } from 'react';
 import {
   Dialog,
+  DialogTitle,
   DialogContent,
   DialogActions,
   IconButton,
@@ -17,7 +17,7 @@ import {
   InputAdornment,
 } from '@mui/material';
 import {
-  X as CloseIcon,
+  X,
   Calendar as CalendarIcon,
   Clock as TimeIcon,
   ChevronDown as ExpandMoreIcon,
@@ -117,14 +117,9 @@ interface EventData {
 }
 
 const eventTypes = [
-  'Meeting',
-  'Conference',
-  'Workshop',
-  'Seminar',
-  'Training',
-  'Team Building',
-  'Presentation',
-  'Other',
+  'Recurring Event',
+  'One-Time Event',
+  'Special Event',
 ];
 
 export default function CreateEventModal({
@@ -168,31 +163,33 @@ export default function CreateEventModal({
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <StyledDialog open={open} onClose={handleClose} maxWidth="sm">
-        <DialogContent className="p-6">
-          {/* Header */}
-          <Box className="flex justify-between items-center">
-            <Typography variant="h5" className="font-bold text-gray-900">
-              Create New Event
+        <DialogTitle sx={{ m: 0, p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+               
+          <Box>
+            <Typography variant="h6" fontWeight='bold' component="h2" className="flex items-center gap-2 text-gray-800">
+             Create New Event
             </Typography>
-            <IconButton
-              onClick={handleClose}
-              className="text-gray-500 hover:text-gray-700"
-              size="small"
-            >
-              <CloseIcon size={20} />
-            </IconButton>
+            <Typography variant="body2" color="text.secondary">
+              Add a new organization event to the system for attendance tracking.
+            </Typography>
           </Box>
-
-          {/* Subtitle */}
-          <Typography variant="body2" className="text-gray-600 mb-4">
-            Add a new organization event to the system for attendance tracking.
-          </Typography>
-
+  
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={{
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <X />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent className="p-2">
           {/* Form */}
-          <Box className="space-y-6 pt-4">
+          <Box>
             {/* Event Type */}
-            <Box>
-              <Typography variant="subtitle2" className="mb-2 font-medium text-gray-700">
+            <Box className='mb-4'>
+              <Typography variant="subtitle2" fontWeight='bold' className="mb-2 text-gray-700">
                 Event Type
               </Typography>
               <FormControl fullWidth>
@@ -215,8 +212,8 @@ export default function CreateEventModal({
             </Box>
 
             {/* Event Name */}
-            <Box>
-              <Typography variant="subtitle2" className="mb-2 font-medium text-gray-700">
+            <Box className='mb-4'>
+              <Typography variant="subtitle2" fontWeight='bold' className="mb-2 text-gray-700">
                 Event Name
               </Typography>
               <StyledTextField
@@ -230,8 +227,8 @@ export default function CreateEventModal({
             </Box>
 
             {/* Description */}
-            <Box>
-              <Typography variant="subtitle2" className="mb-2 font-medium text-gray-700">
+            <Box className='mb-4'>
+              <Typography variant="subtitle2" fontWeight='bold' className="mb-2 text-gray-700">
                 Description
               </Typography>
               <StyledTextField
@@ -245,90 +242,90 @@ export default function CreateEventModal({
               />
             </Box>
 
-            <Box display="flex" justifyContent="space-between" gap={2}>
-              {/* Event Date */}
-              <Box sx={{ width: '45%' }}>
-                <Typography variant="subtitle2" className="mb-2 font-medium text-gray-700">
-                  Event Date
-                </Typography>
-                <DatePicker
-                  value={formData.eventDate}
-                  onChange={(date) => handleInputChange('eventDate', date)}
-                  // slots={{
-                  //   textField: (props) => {
-                  //     // Filter out internal MUI props that shouldn't be passed to DOM
-                  //     const { 
-                  //       sectionListRef, 
-                  //       sectionsContainer, 
-                  //       clearable, 
-                  //       onClear,
-                  //       ...textFieldProps 
-                  //     } = props;
-                      
-                  //     return (
-                  //       <StyledTextField
-                  //         {...textFieldProps}
-                  //         fullWidth
-                  //         placeholder="Pick a date"
-                  //         InputProps={{
-                  //           ...textFieldProps.InputProps,
-                  //           startAdornment: (
-                  //             <InputAdornment position="start">
-                  //               <CalendarIcon size={20} className="text-gray-500" />
-                  //             </InputAdornment>
-                  //           ),
-                  //         }}
-                  //       />
-                  //     );
-                  //   },
-                  // }}
-                />
-              </Box>
+            {/* Event Date */}
+            <Box className='mb-4'>
+              <Typography variant="subtitle2" fontWeight='bold' className="mb-2 text-gray-700">
+                Event Date
+              </Typography>
+              <DatePicker
+                value={formData.eventDate}
+                onChange={(date) => handleInputChange('eventDate', date)}
+                enableAccessibleFieldDOMStructure={false}
+                slots={{
+                  textField: (props) => {
+                    const { 
+                      areAllSectionsEmpty, 
+                      sectionListRef, 
+                      sectionsContainer, 
+                      clearable, 
+                      onClear,
+                      ...textFieldProps 
+                    } = props;
+                    
+                    return (
+                      <StyledTextField
+                        {...textFieldProps}
+                        fullWidth
+                        placeholder="Pick a date"
+                        InputProps={{
+                          ...textFieldProps.InputProps,
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <CalendarIcon size={20} className="text-gray-500" />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    );
+                  },
+                }}
+              />
+            </Box>
 
-              {/* Time */}
-              <Box sx={{ width: '45%' }}>
-                <Typography variant="subtitle2" className="mb-2 font-medium text-gray-700">
-                  Time
-                </Typography>
-                <TimePicker
-                  value={formData.eventTime}
-                  onChange={(time) => handleInputChange('eventTime', time)}
-                  // slots={{
-                  //   textField: (props) => {
-                  //     // Filter out internal MUI props that shouldn't be passed to DOM
-                  //     const { 
-                  //       sectionListRef, 
-                  //       sectionsContainer, 
-                  //       clearable, 
-                  //       onClear,
-                  //       ...textFieldProps 
-                  //     } = props;
-                      
-                  //     return (
-                  //       <StyledTextField
-                  //         {...textFieldProps}
-                  //         fullWidth
-                  //         placeholder="--:--"
-                  //         InputProps={{
-                  //           ...textFieldProps.InputProps,
-                  //           startAdornment: (
-                  //             <InputAdornment position="start">
-                  //               <TimeIcon size={20} className="text-gray-500" />
-                  //             </InputAdornment>
-                  //           ),
-                  //         }}
-                  //       />
-                  //     );
-                  //   },
-                  // }}
-                />
-              </Box>
+            {/* Time */}
+            <Box className='mb-4'>
+              <Typography variant="subtitle2" fontWeight='bold' className="mb-2 text-gray-700">
+                Time
+              </Typography>
+              <TimePicker
+                value={formData.eventTime}
+                onChange={(time) => handleInputChange('eventTime', time)}
+                enableAccessibleFieldDOMStructure={false}
+                slots={{
+                  textField: (props) => {
+                    const { 
+                      areAllSectionsEmpty, 
+                      sectionListRef, 
+                      sectionsContainer, 
+                      clearable, 
+                      onClear,
+                      ...textFieldProps 
+                    } = props;
+                    
+                    return (
+                      <StyledTextField
+                        {...textFieldProps}
+                        fullWidth
+                        placeholder="--:--"
+                        InputProps={{
+                          ...textFieldProps.InputProps,
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <TimeIcon size={20} className="text-gray-500" />
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    );
+                  },
+                }}
+              />
             </Box>
           </Box>
         </DialogContent>
 
         {/* Actions */}
-        <DialogActions className="p-6 pt-0">
+        <DialogActions className="p-4">
           <StyledButton
             variant="outlined"
             onClick={handleClose}

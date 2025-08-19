@@ -69,41 +69,50 @@ export default function LoginPage() {
         </Typography>
 
         <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
-          <TextField
-            fullWidth
-            label="Email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            margin="normal"
-            variant="outlined"
-            required
-          />
-          
-          <TextField
-            fullWidth
-            label="Password"
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            margin="normal"
-            variant="outlined"
-            required
-            placeholder="Enter your password"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={() => setShowPassword(!showPassword)}
-                    edge="end"
-                  >
-                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-          
+          <Box className='mb-4'>
+            <Typography variant="subtitle2" fontWeight='bold' className=" text-gray-700">
+              Email
+            </Typography>
+            <TextField
+              fullWidth
+              type="email"
+              placeholder="your@mail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              margin="normal"
+              variant="outlined"
+              required
+            />
+          </Box>
+
+          <Box className='mb-4'>
+            <Typography variant="subtitle2" fontWeight='bold' className=" text-gray-700">
+              Password
+            </Typography>
+            <TextField
+              fullWidth
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              margin="normal"
+              variant="outlined"
+              required
+              placeholder="Enter your password"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Box>
+
           <Button
             type="submit"
             fullWidth

@@ -66,16 +66,21 @@ export default function LoginPage() {
         </Typography>
 
         <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
-          <TextField
-            fullWidth
-            label="Email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            margin="normal"
-            variant="outlined"
-            required
-          />
+          <Box className='mb-4'>
+            <Typography variant="subtitle2" fontWeight='bold' className=" text-gray-700">
+              Email
+            </Typography>
+            <TextField
+              fullWidth
+              type="email"
+              placeholder="your@mail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              margin="normal"
+              variant="outlined"
+              required
+            />
+          </Box>
           
           <Button
             type="submit"

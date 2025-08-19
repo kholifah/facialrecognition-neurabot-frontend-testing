@@ -198,9 +198,9 @@ export default function DashboardLayout({
       <Box sx={{ flexGrow: 1 }} />
       
       <Box sx={{ p: 2 }}>
-        <Box display="flex" alignItems="center" gap={2} mb={2}>
-          <Avatar sx={{ width: 32, height: 32, bgcolor: 'primary.main' }}>
-            A
+        <Box display="flex" alignItems="center" gap={1} mb={2}>
+          <Avatar sx={{ width: 32, height: 32, bgcolor: 'grey.300', mr: 2 }}>
+              A
           </Avatar>
           <Box>
             <Typography variant="body2" fontWeight="medium">
@@ -217,6 +217,7 @@ export default function DashboardLayout({
           variant="outlined"
           startIcon={<LogOut size={16} />}
           onClick={handleLogout}
+          color='inherit'
           sx={{ textTransform: 'none' }}
         >
           Sign Out
